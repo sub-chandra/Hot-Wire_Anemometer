@@ -6,3 +6,8 @@ The demo contains two parts, Wind Tunnel and Anemometer
 
 ## Theory
 King’s law: $h=a+b\cdot v_f^c$
+
+## File 
+### Demonstration without hardware
+1. Download all files
+2. Running the file `main_demo_win.py`
