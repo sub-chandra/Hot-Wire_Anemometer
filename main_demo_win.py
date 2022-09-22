@@ -13,7 +13,7 @@ from time import sleep
 
 # Excel Date ↓
 # In fact, some data should be collected from hardware, however, by using the this file, the demo can running.
-dateExcel = pd.read_excel('Data/windSpeed_resistant.xlsx')
+dateExcel = pd.read_excel('./Data/windSpeed_resistant.xlsx')
 
 
 # Function of Choosing Mode
