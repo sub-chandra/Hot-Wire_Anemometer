@@ -19,36 +19,36 @@ dateExcel = pd.read_excel('./Data/windSpeed_resistant.xlsx')
 # Function of Choosing Mode
 # can1st.option_add("*TCombobox*Listbox*Background", 'red')
 ModeChoose_getText, ResistanceChoose_getText = 'Standard Resistant', ''       # Combobox default option
-ResistantFilename = 'Data/..'   # The data file
+ResistantFilePath = './Data/'   # The data file
 
-def ModeChooseFunction(event):
-    global ModeChoose_getText
-    ModeChoose_getText = ModeChoose_Combobox_VariableIndex.get()
-    ResistanceChoose_ComboboxID['value'] = ('Silver', 'Copper', "Iron", "Aluminium") \
-        if ModeChoose_getText == 'Standard Resistant' \
-        else ('Sample.NO.1', 'Sample.NO.2', "Sample.NO.3", "Sample.NO.4")
-    # DateExcel=pd.read_excel()
-    # print(ModeChoose_getText)
-    ResistanceChoose_ComboboxID.current(0)
-    FocusMoving_EnterFrame_ID.focus()
+# def ModeChooseFunction(event):
+#     global ModeChoose_getText
+#     ModeChoose_getText = ModeChoose_Combobox_VariableIndex.get()
+#     ResistanceChoose_ComboboxID['value'] = ('Silver', 'Copper', "Iron", "Aluminium") \
+#         if ModeChoose_getText == 'Standard Resistant' \
+#         else ('Sample.NO.1', 'Sample.NO.2', "Sample.NO.3", "Sample.NO.4")
+#     # DateExcel=pd.read_excel()
+#     # print(ModeChoose_getText)
+#     ResistanceChoose_ComboboxID.current(0)
+#     FocusMoving_EnterFrame_ID.focus()
 
 def ResistantChooseFunction(event):
-    global ResistanceChoose_getText, ResistantFilename
+    global ResistanceChoose_getText, ResistantFilePath, dateExcel
     ResistanceChoose_getText = ResistantChoose_Combobox_VariableIndex.get()
-    ResistantFilenameTemp = ResistantFilename + (ResistanceChoose_getText + '.xlsx')
-    # print(ResistantFilenameTemp)
+    # ResistantFileName = ResistantFilePath + (ResistanceChoose_getText + '.xlsx')
     # can1st.delete(resistantLine, averageLine)
+    # dateExcel = pd.read_excel(ResistantFileName)
     FocusMoving_EnterFrame_ID.focus()
     return 0
 
 ModeChoose_Combobox_VariableIndex= tk.StringVar()
-ModeChoose_ComboboxID = ttk.Combobox(can1st, state="readonly", textvariable=ModeChoose_Combobox_VariableIndex,
-                                             justify=tk.CENTER, font=('Arial Black', 9),
-                                             value=('Standard Resistant', 'Unknown Resistant'))
-
-ModeChoose_ComboboxID.current(0)
-ModeChoose_ComboboxID.bind("<<ComboboxSelected>>", ModeChooseFunction)
-ModeChoose_ComboboxID.place(x=x_axisNum+63, y=ComboboxHeight+2)
+# ModeChoose_ComboboxID = ttk.Combobox(can1st, state="readonly", textvariable=ModeChoose_Combobox_VariableIndex,
+#                                              justify=tk.CENTER, font=('Arial Black', 9),
+#                                              value=('Standard Resistant', 'Unknown Resistant'))
+#
+# ModeChoose_ComboboxID.current(0)
+# ModeChoose_ComboboxID.bind("<<ComboboxSelected>>", ModeChooseFunction)
+# ModeChoose_ComboboxID.place(x=x_axisNum+63, y=ComboboxHeight+2)
 # ----------------------------------------------------------------------------------------------------------------
 ResistantChoose_Combobox_VariableIndex= tk.StringVar()
 ResistanceChoose_ComboboxID = ttk.Combobox(can1st, state="readonly", width=12,
@@ -90,7 +90,7 @@ averageLine=can1st.create_line(cor_xAxis, cor_yAxis - 200, cor_xAxis + cor_Lengt
 newlist = [tll[0], int(cor_yAxis-resistantList[0]*coordinate_Resistant_IndexMap)]
 
 while 1:
-    if ModeChoose_getText == 'Standard Resistant':
+    if True:
         can1st.delete(resistantLine, averageLine)
         sleep(chartShowSpeed)
         if ResistanceChoose_getText != '':
@@ -112,7 +112,7 @@ while 1:
             else:
                 newlist = []
                 del resistantList[0]
-                resistantList += [random.randint(250, 280) + random.randint(0, 40)]
+                resistantList += [random.randint(250, 280) + random.randint(0, 40)]  # True
                 chartResistantSummation = chartResistantSummation - resistantList[times - chartResistantCounterMax] + \
                                           resistantList[times]
                 chartResistantAverage = chartResistantSummation / chartResistantCounter
@@ -142,12 +142,12 @@ while 1:
         mainDraw.update_idletasks()
         mainDraw.update()
 
-    if ModeChoose_getText == 'Unknown Resistant':
-        can1st.delete(resistantLine, averageLine)
-        sleep(chartShowSpeed)
-        print('Unknown Resistant Mode')
-        mainDraw.update_idletasks()
-        mainDraw.update()
+    # if ModeChoose_getText == 'Unknown Resistant':
+    #     can1st.delete(resistantLine, averageLine)
+    #     sleep(chartShowSpeed)
+    #     print('Unknown Resistant Mode')
+    #     mainDraw.update_idletasks()
+    #     mainDraw.update()
 
 
 mainDraw.mainloop()
